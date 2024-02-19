@@ -13,7 +13,7 @@ export const userSlice = createSlice({
     loginStart: (state) => {
       state.loading = true;
     },
-    loginSuccess: (state,action) => {
+    loginSuccess: (state, action) => {
       state.loading = true;
       state.currentUser = action.payload;
     },
@@ -26,7 +26,20 @@ export const userSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
+    subscription: (state, action) => {
+      if (state.currentUser.subscriberedUser.includes(action.payload)) {
+        state.currentUser.subscriberedUser.splice(
+          state.currentUser.subscriberedUser.findIndex(
+            (channelId) => channelId === action.payload
+          ),
+          1
+        );
+      } else {
+        state.currentUser.subscriberedUser.push(action.payload);
+      }
+    },
   },
 });
-export const { loginStart, loginSuccess, loginFailure, logout } = userSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, logout, subscription } =
+  userSlice.actions;
 export default userSlice.reducer;

@@ -64,10 +64,8 @@ const Card = ({ type, video }) => {
     fetchChannel();
   }, [video.userId]);
 
-  // console.log(channel);
-
   return (
-    <Link to={`/video/${video.userId}`} style={{ textDecoration: "none" }}>
+    <Link to={`/video/${video._id}`} style={{ textDecoration: "none" }}>
       <Container type={type}>
         <Image type={type} src={video.imgUrl} />
         <Details type={type}>
